@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VK-E2E - Авторизация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body class="auth-mode">
+    <div class="drag-region"></div>
+    <div class="container" id="authScreen">
+        <h2>Авторизация через VK (KateMobile)</h2>
+        <p>Перенаправление на страницу входа...</p>
+    </div>
+    <script>
+        // Автоматический редирект на OAuth VK, как на vkhost для app 2685278
+        location.href = "https://oauth.vk.com/authorize?client_id=2685278&scope=offline&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&v=5.131";
+    </script>
+</body>
+</html>

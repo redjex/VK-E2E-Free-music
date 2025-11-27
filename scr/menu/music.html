@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VK-E2E - Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/music.css">
+</head>
+<body>
+    <div class="drag-region"></div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-logo">
+            <img src="../img/icons/logo-menu.svg" alt="Logo" onerror="this.style.display='none'">
+        </div>
+        <div class="sidebar-buttons">
+            <button id="searchBtn">Search</button>
+            <button id="wallBtn">Wall</button>
+            <button id="musicBtn">Music</button>
+            <button id="settingsBtn">Settings</button>
+            <button id="aboutBtn">About</button>
+        </div>
+        <div class="sidebar-version">
+            version 0.1 BETA
+        </div>
+    </div>
+
+    <!-- Menu Toggle Button -->
+    <div class="menu-toggle" id="menuToggle">
+        <img src="../img/icons/menu.svg" alt="Menu" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Main Content -->
+    <div class="music-content">
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Поиск треков...">
+                    <button id="performSearch">Найти</button>
+                </div>
+                <button class="shuffle-btn" id="shuffleBtn" disabled>Перемешать</button>
+            </div>
+            
+            <div class="track-list" id="trackList">
+                <div class="loading-message">Загрузка треков...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Player Bottom -->
+    <div class="player-fixed">
+        <div class="player-container">
+            <!-- Current Track Info -->
+            <div class="current-track-info">
+                <img class="current-cover" id="currentCover" src="" alt="Cover" style="display: none;">
+                <div class="current-details">
+                    <div class="current-title" id="currentTitle">Выберите трек</div>
+                    <div class="current-artist" id="currentArtist">-</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="time-info">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="player-controls">
+                <button class="control-btn" id="prevBtn" title="Previous">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn play" id="playBtn" title="Play">
+                    <svg viewBox="0 0 24 24" id="playIcon">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg viewBox="0 0 24 24" id="pauseIcon" style="display: none;">
+                        <path d="M6 4h4v16H6zm8 0h4v16h-4z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn" id="nextBtn" title="Next">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 18h2V6h-2zm-11-7l8.5-6v12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../utils/sidebar-menu.js"></script>
+    <script src="../utils/music-player.js"></script>
+    <script>
+        // Дополнительный обработчик для возврата в меню
+        document.getElementById('menuToggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Обработчики боковых кнопок меню
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('wallBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('settingsBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('aboutBtn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

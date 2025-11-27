@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.drag-region {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    -webkit-app-region: drag;
+    z-index: 9999;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #181818;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 1);
+    border-radius: 25px;
+    padding: 0px;
+    text-align: center;
+    min-width: 350px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0px auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#authScreen {
+    background: white;
+    color: #181818;
+    border-radius: 25px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 820px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    animation: appear 0.5s ease-out;
+}
+
+#authScreen h2 {
+    color: #181818;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#authScreen .hint {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.5;
+    max-width: 350px;
+}
+
+#authScreen .hint code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+#authScreen #tokenInput {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#authScreen #tokenInput:focus {
+    border-color: #181818;
+}
+
+#authScreen .login-btn {
+    background: #181818;
+    color: white;
+    border: 2px solid #181818;
+    padding: 12px 50px;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#authScreen .login-btn:hover {
+    background: transparent;
+    color: #181818;
+}
+
+#authScreen #authStatus {
+    color: #666;
+    font-size: 0.9em;
+    min-height: 20px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

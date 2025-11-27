@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VK-E2E</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/menu.css">
+</head>
+<body>
+    <div class="drag-region"></div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-logo">
+            <img src="../img/icons/logo-menu.svg" alt="Logo" onerror="this.style.display='none'">
+        </div>
+        <div class="sidebar-buttons">
+            <button id="searchBtn">Search</button>
+            <button id="wallBtn">Wall</button>
+            <button id="musicBtn">Music</button>
+            <button id="settingsBtn">Settings</button>
+            <button id="aboutBtn">About</button>
+        </div>
+        <div class="sidebar-version">
+            version 0.1 BETA
+        </div>
+    </div>
+
+    <!-- Menu Toggle Button -->
+    <div class="menu-toggle" id="menuToggle">
+        <img src="../img/icons/menu.svg" alt="Menu" onerror="this.style.display='none'">
+    </div>
+
+    <div class="url-profile">
+        <h1>
+            <a href="#" id="profileLink" target="_blank" style="color: white; text-decoration: none;">
+                vk.com/<span id="screenName">...</span>
+            </a>
+        </h1>
+    </div>
+
+    <div class="content-wrapper" id="contentWrapper">
+        <div class="container" id="mainContainer">
+            <img id="userCover" src="../img/baner.png" alt="Cover">
+        </div>
+
+        <div class="button-class" id="buttons">
+            <button id="subscribeBtn" class="btn-outline">
+                <span class="btn-text">Subscribe</span>
+                <div id="subscribeAnim" class="anim-container"></div>
+                <div id="unsubscribeAnim" class="anim-container"></div>
+            </button>
+            <button>Group</button>
+            <button>Message</button>
+        </div>
+
+        <div class="avatar-container" id="avatarContainer">
+            <div class="avatar-background"></div>
+            <img id="userAvatar" src="" alt="Avatar">
+        </div>
+    </div>
+
+    <script src="../utils/url-name.js"></script>
+    <script src="../utils/menu.js"></script>
+    <script src="../utils/sidebar-menu.js"></script>
+    <script src="../utils/script.js"></script>
+    <script>
+        // Обработчики боковых кнопок меню
+        document.getElementById('musicBtn').addEventListener('click', function() {
+            window.location.href = 'music.html';
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            // Пока остаемся на главной
+            console.log('Search clicked');
+        });
+
+        document.getElementById('wallBtn').addEventListener('click', function() {
+            // Пока остаемся на главной
+            console.log('Wall clicked');
+        });
+
+        document.getElementById('settingsBtn').addEventListener('click', function() {
+            // Пока остаемся на главной
+            console.log('Settings clicked');
+        });
+
+        document.getElementById('aboutBtn').addEventListener('click', function() {
+            // Пока остаемся на главной
+            console.log('About clicked');
+        });
+    </script>
+</body>
+</html>
