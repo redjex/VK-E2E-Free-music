@@ -34,6 +34,7 @@
     let isSearching = false;
     let isMyTracksVisible = false;
     let isPlayingFromMyTracks = false; // Флаг для отслеживания источника воспроизведения
+    let isPlayingFromSearch = false; // Флаг для треков из поиска
     
     // VK API (требуется токен)
     const VK_API_VERSION = '5.131';
@@ -321,22 +322,20 @@
             isMyTracksVisible = false;
 
             visualizerContainer.classList.remove('hidden');
-            visualizerImage.src = '../img/icons/aether_play_w.png';
-
+            
             const state = audioManager.getState();
-            if (state.isPlaying && state.currentTrack) {
-                visualizerImage.src = '../img/icons/aether_stop_w.png';
-                if (window.meshGradient) {
-                    window.meshGradient.start(state.currentTrack.title, state.currentTrack.artist);
-                }
-            } else if (state.currentTrack) {
-                // Если трек есть но на паузе - показываем play иконку но оставляем градиент
-                visualizerImage.src = '../img/icons/aether_play_w.png';
-                if (window.meshGradient) {
-                    window.meshGradient.start(state.currentTrack.title, state.currentTrack.artist);
-                }
-            } else {
-                if (window.meshGradient) window.meshGradient.stop();
+            
+            // Всегда показываем play иконку при возврате из "Моих треков"
+            visualizerImage.src = '../img/icons/aether_play_w.png';
+            
+            // Останавливаем музыку если она играла
+            if (state.isPlaying) {
+                audioManager.togglePlay();
+            }
+            
+            // Останавливаем градиент
+            if (window.meshGradient) {
+                window.meshGradient.stop();
             }
         }
     }
@@ -476,8 +475,14 @@
                     audioManager.playTrack(track, index);
                     tracks = searchTracks;
                     isPlayingFromMyTracks = false; // Сбрасываем флаг
+                    isPlayingFromSearch = true; // Устанавливаем флаг поиска
                     shuffleBtn.disabled = false;
                     searchResults.classList.add('hidden');
+                    
+                    // Для треков из поиска показываем play иконку
+                    if (visualizerImage) {
+                        visualizerImage.src = '../img/icons/aether_play_w.png';
+                    }
                 });
                 
                 searchResults.appendChild(item);
@@ -501,9 +506,10 @@
                 if (success && tracks.length > 0) {
                     audioManager.playTrack(tracks[0], 0);
                     isPlayingFromMyTracks = false;
+                    isPlayingFromSearch = false;
                 }
-            } else if (isPlayingFromMyTracks && !state.isPlaying) {
-                // Трек из "Моих треков" на паузе - загружаем VK Микс
+            } else if (isPlayingFromMyTracks || isPlayingFromSearch) {
+                // Трек из "Моих треков" или поиска - загружаем VK Микс
                 visualizerImage.classList.add('loading');
                 const success = await loadVKMix();
                 visualizerImage.classList.remove('loading');
@@ -511,9 +517,10 @@
                 if (success && tracks.length > 0) {
                     audioManager.playTrack(tracks[0], 0);
                     isPlayingFromMyTracks = false;
+                    isPlayingFromSearch = false;
                 }
             } else {
-                // В остальных случаях - просто toggle play/pause
+                // VK Микс - обычный toggle
                 audioManager.togglePlay();
             }
         });
@@ -701,9 +708,9 @@
             pauseIcon.style.display = 'block';
             
             if (visualizerImage) {
-                // Если трек из "Моих треков" - оставляем play иконку
-                // Если из VK Микса или поиска - показываем stop иконку
-                if (isPlayingFromMyTracks) {
+                // Если трек из "Моих треков" или поиска - оставляем play иконку
+                // Если из VK Микса - показываем stop иконку
+                if (isPlayingFromMyTracks || isPlayingFromSearch) {
                     visualizerImage.src = '../img/icons/aether_play_w.png';
                 } else {
                     visualizerImage.src = '../img/icons/aether_stop_w.png';
