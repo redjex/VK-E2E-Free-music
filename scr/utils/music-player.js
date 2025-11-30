@@ -325,17 +325,32 @@
             
             const state = audioManager.getState();
             
-            // Всегда показываем play иконку при возврате из "Моих треков"
-            visualizerImage.src = '../img/icons/aether_play_w.png';
-            
-            // Останавливаем музыку если она играла
-            if (state.isPlaying) {
-                audioManager.togglePlay();
-            }
-            
-            // Останавливаем градиент
-            if (window.meshGradient) {
-                window.meshGradient.stop();
+            // Проверяем что играет
+            if (state.currentTrack && state.isPlaying) {
+                // Если трек из "Моих треков" или поиска - показываем play иконку
+                if (isPlayingFromMyTracks || isPlayingFromSearch) {
+                    visualizerImage.src = '../img/icons/aether_play_w.png';
+                } else {
+                    // VK Микс - показываем stop иконку
+                    visualizerImage.src = '../img/icons/aether_stop_w.png';
+                }
+                // Продолжаем градиент
+                if (window.meshGradient) {
+                    window.meshGradient.start(state.currentTrack.title, state.currentTrack.artist);
+                }
+            } else if (state.currentTrack && !state.isPlaying) {
+                // Трек на паузе - показываем play иконку
+                visualizerImage.src = '../img/icons/aether_play_w.png';
+                // Продолжаем градиент
+                if (window.meshGradient) {
+                    window.meshGradient.start(state.currentTrack.title, state.currentTrack.artist);
+                }
+            } else {
+                // Нет трека - показываем play иконку
+                visualizerImage.src = '../img/icons/aether_play_w.png';
+                if (window.meshGradient) {
+                    window.meshGradient.stop();
+                }
             }
         }
     }
