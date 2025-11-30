@@ -440,7 +440,7 @@ body {
     padding: 20px;
     height: calc(3 * 120px + 2 * 15px + 40px);
     align-content: flex-start;
-    z-index: 1010;
+    z-index: 1100;
 }
 
 .my-tracks-list::-webkit-scrollbar {
@@ -910,4 +910,5 @@ body {
     font-size: 0.9em;
     text-align: center;
     min-width: 40px;
+
 }
